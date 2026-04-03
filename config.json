@@ -1,0 +1,143 @@
+{
+  "settings": {
+    "midiPortName": "System Ambient Engine",
+    "pollIntervalMs": 2000,
+    "ccIntervalMs": 100,
+    "logStateIntervalMs": 5000
+  },
+
+  "continuous": {
+    "cpu": {
+      "enabled": true,
+      "channel": 1,
+      "type": "cc",
+      "cc": 1,
+      "valueMin": 0,
+      "valueMax": 127,
+      "_comment": "Mod wheel - tension / brightness"
+    },
+    "ram": {
+      "enabled": true,
+      "channel": 1,
+      "type": "cc",
+      "cc": 2,
+      "valueMin": 0,
+      "valueMax": 127,
+      "_comment": "Density / thickness of texture"
+    },
+    "net": {
+      "enabled": true,
+      "channel": 1,
+      "type": "cc",
+      "cc": 3,
+      "valueMin": 0,
+      "valueMax": 127,
+      "_comment": "Rhythmic activity / motion"
+    },
+    "disk": {
+      "enabled": true,
+      "channel": 1,
+      "type": "cc",
+      "cc": 4,
+      "valueMin": 0,
+      "valueMax": 127,
+      "_comment": "Granularity / texture detail"
+    },
+    "errorLevel": {
+      "enabled": true,
+      "channel": 1,
+      "type": "cc",
+      "cc": 5,
+      "valueMin": 0,
+      "valueMax": 127,
+      "_comment": "Dissonance / instability"
+    },
+    "activity": {
+      "enabled": false,
+      "channel": 1,
+      "type": "cc",
+      "cc": 11,
+      "valueMin": 0,
+      "valueMax": 127,
+      "_comment": "Composite activity (cpu+disk+net). Disabled by default."
+    }
+  },
+
+  "clipLauncher": {
+    "_comment": "Fire MIDI notes to trigger clips in Ableton/Bitwig Session View. The DAW's launch quantization handles beat-alignment. Use a dedicated MIDI channel and map notes to clip rows in your DAW.",
+    "enabled": false,
+    "retriggerIntervalMs": 8000,
+    "mappings": [
+      {
+        "_comment": "CPU level selects ambient scene clip row (ch4, notes 36-38 = 3 scenes)",
+        "source": "cpu",
+        "channel": 4,
+        "noteOnDurationMs": 200,
+        "ranges": [
+          { "min": 0.0,  "max": 0.33, "note": 36, "_label": "idle scene"   },
+          { "min": 0.33, "max": 0.66, "note": 37, "_label": "active scene" },
+          { "min": 0.66, "max": 1.0,  "note": 38, "_label": "stressed scene" }
+        ]
+      },
+      {
+        "_comment": "Error level toggles a tension/dissonance clip layer (ch5)",
+        "source": "errorLevel",
+        "channel": 5,
+        "noteOnDurationMs": 200,
+        "ranges": [
+          { "min": 0.0,  "max": 0.25, "note": 36, "_label": "calm"      },
+          { "min": 0.25, "max": 0.6,  "note": 37, "_label": "tension"   },
+          { "min": 0.6,  "max": 1.0,  "note": 38, "_label": "dissonant" }
+        ]
+      }
+    ]
+  },
+
+  "events": {
+    "notification": {
+      "enabled": true,
+      "channel": 2,
+      "note": 74,
+      "velocityMin": 40,
+      "velocityMax": 90,
+      "durationMs": 400,
+      "_comment": "Short high melodic accent"
+    },
+    "success": {
+      "enabled": true,
+      "channel": 2,
+      "note": 69,
+      "velocityMin": 30,
+      "velocityMax": 70,
+      "durationMs": 600,
+      "_comment": "Soft resolving tone"
+    },
+    "error": {
+      "enabled": true,
+      "channel": 3,
+      "note": 36,
+      "velocityMin": 60,
+      "velocityMax": 110,
+      "durationMs": 800,
+      "_comment": "Low dissonant thud"
+    },
+    "service": {
+      "enabled": true,
+      "channel": 2,
+      "note": 60,
+      "velocityMin": 30,
+      "velocityMax": 65,
+      "durationMs": 500,
+      "_comment": "Neutral service state change"
+    },
+    "custom": {
+      "enabled": true,
+      "channel": 2,
+      "note": 64,
+      "velocityMin": 40,
+      "velocityMax": 80,
+      "durationMs": 450,
+      "_comment": "Generic hook for external triggers"
+    }
+  }
+}

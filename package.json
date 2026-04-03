@@ -1,0 +1,15 @@
+{
+  "name": "sys2midi",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Linux system metrics -> generative MIDI ambient music engine",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "midi": "^2.0.0",
+    "systeminformation": "^5.0.0"
+  }
+}

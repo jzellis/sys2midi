@@ -1,0 +1,1 @@
+This is a little AI-written tool to convert system events to MIDI data that can be fed to a local or network DAW/synth/environment. It's not really done, but you can clone it and do a `npm install` and then `npm start` or `npm run dev` to play with it.
